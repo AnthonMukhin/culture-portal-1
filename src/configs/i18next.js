@@ -3,20 +3,12 @@ import { initReactI18next } from 'react-i18next';
 
 import { locales, languages } from '../translations';
 
-let currentLanguage = Object.keys(languages).find((lang) => languages[lang].default);
-if (typeof window !== 'undefined') {
-  const lang = localStorage.getItem('lang');
-  if (lang) {
-    currentLanguage = lang;
-  }
-}
-
 i18n
   .use(initReactI18next)
   .init({
     resources: locales,
-    fallbackLng: currentLanguage,
-    lng: currentLanguage,
+    fallbackLng: Object.keys(languages).find((lang) => languages[lang].default),
+    lng: Object.keys(languages).find((lang) => languages[lang].default),
     debug: false,
     preload: ['ru', 'en', 'be'],
     initImmediate: false,
@@ -24,5 +16,12 @@ i18n
       wait: true,
     },
   });
+
+if (typeof window !== 'undefined') {
+  const lang = localStorage.getItem('lang');
+  if (lang) {
+    i18n.changeLanguage(lang);
+  }
+}
 
 export default i18n;
