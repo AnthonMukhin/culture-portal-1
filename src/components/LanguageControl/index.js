@@ -9,7 +9,9 @@ const LanguageControl = ({ languages }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
+    console.log(i18n.language);
     i18n.changeLanguage(value);
+    console.log(i18n.language);
     localStorage.setItem('lang', value);
   };
 
